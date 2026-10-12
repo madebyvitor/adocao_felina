@@ -29,15 +29,10 @@ const footerGroups = [
   },
 ] as const;
 
-function Logo() {
+function Logo({ className = "h-16" }: { className?: string }) {
   return (
-    <Link href="/" className="flex items-center gap-2.5">
-      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-foreground text-background">
-        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
-          <path d="M7.2 9.2 5.2 4.4l4.2 2.8L12 5.2l2.6 2 4.2-2.8-2 4.8c1.5 1.4 2.4 3.2 2.4 5.4 0 3.6-3.1 6.4-7.2 6.4s-7.2-2.8-7.2-6.4c0-2.2.9-4 2.4-5.4Z" />
-        </svg>
-      </span>
-      <span className="font-serif text-xl tracking-tight">{siteName}</span>
+    <Link href="/" className="flex items-center">
+      <img src="/logo.svg" alt={siteName} className={`${className} w-auto`} />
     </Link>
   );
 }
@@ -74,7 +69,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5">
-        <Logo />
+        <Logo className="h-24" />
         <nav className="hidden items-center gap-5 xl:flex" aria-label="Seções">
           {navLinks.map((link) => (
             <Link

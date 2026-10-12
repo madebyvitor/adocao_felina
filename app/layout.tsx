@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     template: `%s · ${siteName}`,
   },
   description: siteDescription,
+  icons: { icon: "/logo.svg" },
   openGraph: {
     siteName,
     locale: "pt_BR",
