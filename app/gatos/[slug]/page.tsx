@@ -79,7 +79,7 @@ async function CatProfile({ params }: CatPageProps) {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-8 sm:py-12">
-      <Link href="/" className="text-sm text-muted hover:text-foreground">
+      <Link href="/#gatos" className="text-sm text-muted hover:text-foreground">
         Voltar ao catálogo
       </Link>
 
@@ -96,7 +96,7 @@ async function CatProfile({ params }: CatPageProps) {
           <h1 className="mt-3 font-serif text-5xl tracking-tight">{cat.name}</h1>
 
           <section className="mt-6">
-            <h2 className="text-xs font-medium tracking-[0.18em] text-accent uppercase">
+            <h2 className="text-xs font-medium tracking-[0.18em] text-foreground/70 uppercase">
               Temperamento
             </h2>
             <p className="mt-2 font-serif text-2xl leading-snug text-balance">{cat.personality}</p>
@@ -121,12 +121,12 @@ async function CatProfile({ params }: CatPageProps) {
           )}
 
           <section className="mt-8">
-            <h2 className="text-xs font-medium tracking-[0.18em] text-accent uppercase">História</h2>
+            <h2 className="text-xs font-medium tracking-[0.18em] text-foreground/70 uppercase">História</h2>
             <p className="mt-2 text-base leading-relaxed text-foreground/90">{cat.description}</p>
           </section>
 
           <section className="mt-8">
-            <h2 className="text-xs font-medium tracking-[0.18em] text-accent uppercase">Saúde</h2>
+            <h2 className="text-xs font-medium tracking-[0.18em] text-foreground/70 uppercase">Saúde</h2>
             <p className="mt-2 text-base leading-relaxed text-foreground/90">{cat.health_info}</p>
           </section>
 

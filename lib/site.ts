@@ -1,4 +1,4 @@
-export const siteName = "Doação Felina";
+export const siteName = "Adoção Felina";
 
 export const siteDescription =
   "Catálogo de gatos para adoção. Veja o perfil, compartilhe o link e chame no WhatsApp.";
@@ -14,9 +14,17 @@ export const whatsappNumbers = [
 ] as const;
 
 export function adoptionMessage(catName: string) {
-  return `Olá! Vi o ${catName} no site Doação Felina e gostaria de saber mais sobre a adoção.`;
+  return `Olá! Vi o ${catName} no site Adoção Felina e gostaria de saber mais sobre a adoção.`;
+}
+
+export function helpMessage() {
+  return "Olá! Vi o site Adoção Felina e gostaria de saber como posso ajudar.";
 }
 
 export function whatsappHref(phone: string, catName: string) {
   return `https://wa.me/${phone}?text=${encodeURIComponent(adoptionMessage(catName))}`;
+}
+
+export function whatsappHelpHref(phone: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(helpMessage())}`;
 }

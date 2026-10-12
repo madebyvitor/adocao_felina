@@ -18,7 +18,7 @@ export function WhatsAppButtons({ catName }: { catName: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Entrar em contato pelo WhatsApp ${index + 1}`}
-          className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-accent px-5 text-base font-medium text-white transition-colors hover:bg-accent-dark"
+          className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent px-5 text-base font-medium text-foreground transition-colors hover:bg-accent-dark"
         >
           <WhatsAppIcon />
           Entrar em contato

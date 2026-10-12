@@ -31,7 +31,7 @@ export function ShareProfile({ name }: { name: string }) {
     try {
       await navigator.share({
         title: `Adote o ${name}!`,
-        text: `Olha o perfil do ${name} na Doação Felina.`,
+        text: `Olha o perfil do ${name} na Adoção Felina.`,
         url: window.location.href,
       });
     } catch (error) {

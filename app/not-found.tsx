@@ -9,7 +9,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="mt-8 inline-flex h-11 items-center rounded-full bg-foreground px-5 text-sm text-card"
+        className="mt-8 inline-flex h-11 items-center rounded-full bg-accent px-5 text-sm font-medium text-foreground"
       >
         Ver o catálogo
       </Link>
