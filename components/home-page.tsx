@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Catalog } from "@/components/catalog";
-import { Faq } from "@/components/faq";
 import type { Cat } from "@/lib/cats";
 import { whatsappHelpHref, whatsappNumbers } from "@/lib/site";
 
@@ -48,11 +47,6 @@ const steps = [
     number: "02",
     title: "Chame no WhatsApp",
     text: "No perfil há dois contatos, um embaixo do outro, já com o nome do gato na mensagem.",
-  },
-  {
-    number: "03",
-    title: "Combine a visita",
-    text: "A conversa segue no WhatsApp até a visita e a decisão. Sem pressa, com clareza.",
   },
 ] as const;
 
@@ -166,7 +160,7 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
             Uma decisão para a vida.
           </h2>
         </div>
-        <ol className="mt-12 grid gap-10 sm:grid-cols-3">
+        <ol className="mt-12 grid gap-10 sm:grid-cols-2">
           {steps.map((step) => (
             <li key={step.number}>
               <p className="flex items-center gap-3 font-serif text-3xl tracking-tight">
@@ -211,13 +205,6 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
         </div>
       </section>
 
-      <section id="duvidas" className="mx-auto w-full max-w-6xl px-5 py-8 sm:py-12">
-        <h2 className="font-serif text-4xl tracking-tight sm:text-5xl">Dúvidas</h2>
-        <div className="mt-8">
-          <Faq />
-        </div>
-      </section>
-
       <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-16 sm:py-24 lg:grid-cols-2 lg:gap-16">
         <div>
           <h2 className="font-serif text-4xl tracking-tight text-balance sm:text-5xl">
@@ -243,7 +230,7 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
             Quer ajudar de outro jeito?
           </h2>
           <p className="mt-5 text-base leading-relaxed text-muted">
-            Lar temporário, divulgação de um perfil e ração fazem diferença. Chame em um dos
+            Divulgação de um perfil e ração fazem diferença. Chame em um dos
             contatos e diga como pode participar.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">

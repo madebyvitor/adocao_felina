@@ -8,7 +8,6 @@ const navLinks = [
   { href: "/#gatos", label: "Os gatos" },
   { href: "/#como-adotar", label: "Como adotar" },
   { href: "/#antes", label: "Antes de adotar" },
-  { href: "/#duvidas", label: "Dúvidas" },
   { href: "/#sobre", label: "Sobre" },
 ] as const;
 
@@ -24,7 +23,6 @@ const footerGroups = [
   {
     title: "O site",
     links: [
-      { href: "/#duvidas", label: "Dúvidas" },
       { href: "/#sobre", label: "Sobre" },
       { href: "/#ajuda", label: "Quero ajudar" },
     ],
