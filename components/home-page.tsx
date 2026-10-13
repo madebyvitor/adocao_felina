@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Catalog } from "@/components/catalog";
-import type { Cat } from "@/lib/cats";
+import type { Cat } from "@/lib/cat";
 import { whatsappHelpHref, whatsappNumbers } from "@/lib/site";
 
-function pick(cats: Cat[], slug: string) {
-  return cats.find((cat) => cat.slug === slug) ?? cats[0];
+function pickNext(cats: Cat[], used: Set<string>, prefer?: (cat: Cat) => boolean) {
+  if (prefer) {
+    const match = cats.find((cat) => prefer(cat) && !used.has(cat.id));
+    if (match) return match;
+  }
+  return cats.find((cat) => !used.has(cat.id));
 }
 
 function article(sex: string) {
@@ -23,16 +27,21 @@ function PhotoFrame({
   className?: string;
   sizes?: string;
 }) {
+  const src = cat.photos[0];
+
   return (
     <div className={`relative overflow-hidden rounded-[1.75rem] bg-line ${className}`}>
-      <Image
-        src={cat.photos[0]}
-        alt={`Foto de ${cat.name}`}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className="object-cover"
-      />
+      {src ? (
+        <Image
+          src={src}
+          alt={`Foto de ${cat.name}`}
+          fill
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          sizes={sizes}
+          className="object-cover"
+        />
+      ) : null}
     </div>
   );
 }
@@ -46,7 +55,7 @@ const steps = [
   {
     number: "02",
     title: "Chame no WhatsApp",
-    text: "No perfil há dois contatos, um embaixo do outro, já com o nome do gato na mensagem.",
+    text: "No perfil, o botão abre o WhatsApp de quem cuida desse gato, já com o nome na mensagem.",
   },
 ] as const;
 
@@ -58,10 +67,14 @@ const preparations = [
 ] as const;
 
 export function HomePageContent({ cats }: { cats: Cat[] }) {
+  const used = new Set<string>();
   const hero = cats.find((cat) => cat.status === "disponivel") ?? cats[0];
-  const about = pick(cats, "luna");
-  const later = pick(cats, "pipoca");
-  const closing = pick(cats, "mingau");
+  if (hero) used.add(hero.id);
+  const about = pickNext(cats, used) ?? hero;
+  if (about) used.add(about.id);
+  const later = pickNext(cats, used, (cat) => cat.status === "adotado") ?? about;
+  if (later) used.add(later.id);
+  const closing = pickNext(cats, used) ?? later;
   const available = cats.filter((cat) => cat.status === "disponivel").length;
   const inProgress = cats.filter((cat) => cat.status === "em_processo").length;
   const adopted = cats.filter((cat) => cat.status === "adotado").length;
@@ -83,7 +96,9 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
 
   return (
     <>
-      <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:grid-cols-2 lg:gap-16 lg:pt-20">
+      <section
+        className={`mx-auto w-full max-w-6xl items-center gap-10 px-5 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:gap-16 lg:pt-20 ${hero ? "grid lg:grid-cols-2" : ""}`}
+      >
         <div>
           <h1 className="font-serif text-5xl leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl">
             Um encontro.
@@ -106,15 +121,17 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
             </Link>
           </div>
         </div>
-        <div className="relative">
-          <PhotoFrame cat={hero} priority className="aspect-[4/5] sm:aspect-[5/4]" />
-          <Link
-            href={`/gatos/${hero.slug}`}
-            className="absolute bottom-4 left-4 rounded-full bg-background/90 px-4 py-2 text-sm font-medium backdrop-blur"
-          >
-            Conheça {article(hero.sex)} {hero.name} →
-          </Link>
-        </div>
+        {hero ? (
+          <div className="relative">
+            <PhotoFrame cat={hero} priority className="aspect-[4/5] sm:aspect-[5/4]" />
+            <Link
+              href={`/gatos/${hero.slug}`}
+              className="absolute bottom-4 left-4 rounded-full bg-background/90 px-4 py-2 text-sm font-medium backdrop-blur"
+            >
+              Conheça {article(hero.sex)} {hero.name} →
+            </Link>
+          </div>
+        ) : null}
       </section>
 
       <section className="border-y border-line" aria-label="Números do catálogo">
@@ -135,8 +152,11 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
         <Catalog cats={cats} />
       </section>
 
-      <section id="sobre" className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-8 sm:py-12 lg:grid-cols-2 lg:gap-16">
-        <PhotoFrame cat={about} className="aspect-[4/5] sm:aspect-[5/4]" />
+      <section
+        id="sobre"
+        className={`mx-auto w-full max-w-6xl items-center gap-10 px-5 py-8 sm:py-12 lg:gap-16 ${about ? "grid lg:grid-cols-2" : ""}`}
+      >
+        {about ? <PhotoFrame cat={about} className="aspect-[4/5] sm:aspect-[5/4]" /> : null}
         <div>
           <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">Sobre</p>
           <h2 className="mt-3 font-serif text-4xl tracking-tight text-balance sm:text-5xl">
@@ -205,7 +225,9 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-16 sm:py-24 lg:grid-cols-2 lg:gap-16">
+      <section
+        className={`mx-auto w-full max-w-6xl items-center gap-10 px-5 py-16 sm:py-24 lg:gap-16 ${later ? "grid lg:grid-cols-2" : ""}`}
+      >
         <div>
           <h2 className="font-serif text-4xl tracking-tight text-balance sm:text-5xl">
             O amor não tem idade.
@@ -221,7 +243,7 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
             Quero conhecer
           </Link>
         </div>
-        <PhotoFrame cat={later} className="aspect-[4/5] sm:aspect-[5/4]" />
+        {later ? <PhotoFrame cat={later} className="aspect-[4/5] sm:aspect-[5/4]" /> : null}
       </section>
 
       <section id="ajuda" className="mx-auto w-full max-w-6xl px-5 pb-16 sm:pb-24">
@@ -250,12 +272,16 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
       </section>
 
       <section className="bg-foreground text-white">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:py-20 lg:grid-cols-2 lg:gap-16">
-          <PhotoFrame
-            cat={closing}
-            className="aspect-[4/3]"
-            sizes="(min-width: 1024px) 40vw, 100vw"
-          />
+        <div
+          className={`mx-auto max-w-6xl items-center gap-10 px-5 py-16 sm:py-20 lg:gap-16 ${closing ? "grid lg:grid-cols-2" : ""}`}
+        >
+          {closing ? (
+            <PhotoFrame
+              cat={closing}
+              className="aspect-[4/3]"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+          ) : null}
           <div>
             <h2 className="font-serif text-4xl tracking-tight text-balance text-white sm:text-5xl">
               Talvez o que falte na sua casa seja uma companhia.

@@ -36,13 +36,13 @@ export async function generateMetadata({ params }: CatPageProps): Promise<Metada
       description: cat.personality,
       url: `/gatos/${cat.slug}`,
       type: "website",
-      images: [{ url: cat.photos[0], alt: `Foto de ${cat.name}` }],
+      images: cat.photos[0] ? [{ url: cat.photos[0], alt: `Foto de ${cat.name}` }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: cat.personality,
-      images: [cat.photos[0]],
+      images: cat.photos[0] ? [cat.photos[0]] : undefined,
     },
   };
 }
@@ -116,7 +116,7 @@ async function CatProfile({ params }: CatPageProps) {
             </p>
           ) : (
             <div className="mt-6">
-              <WhatsAppButtons catName={cat.name} />
+              <WhatsAppButtons catName={cat.name} phone={cat.whatsapp_contact} />
             </div>
           )}
 

@@ -36,15 +36,17 @@ export function CatPhoto({
       style={{ borderRadius: 28 }}
       transition={{ type: "spring", stiffness: 320, damping: 34, mass: 0.8 }}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        loading={priority ? "eager" : "lazy"}
-        sizes={sizes}
-        className="object-cover"
-      />
+      {src ? (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          sizes={sizes}
+          className="object-cover"
+        />
+      ) : null}
     </motion.div>
   );
 }

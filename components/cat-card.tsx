@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { CatPhoto } from "@/components/cat-photo";
 import { StatusBadge } from "@/components/status-badge";
-import type { Cat } from "@/lib/cats";
+import type { Cat } from "@/lib/cat";
 
 export function CatCard({
   cat,

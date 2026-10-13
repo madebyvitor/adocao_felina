@@ -1,4 +1,4 @@
-import { whatsappHref, whatsappNumbers } from "@/lib/site";
+import { whatsappHref } from "@/lib/site";
 
 function WhatsAppIcon() {
   return (
@@ -8,22 +8,19 @@ function WhatsAppIcon() {
   );
 }
 
-export function WhatsAppButtons({ catName }: { catName: string }) {
+export function WhatsAppButtons({ catName, phone }: { catName: string; phone: string }) {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return null;
+
   return (
-    <div className="flex flex-col gap-3">
-      {whatsappNumbers.map((contact, index) => (
-        <a
-          key={contact.id}
-          href={whatsappHref(contact.phone, catName)}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Entrar em contato pelo WhatsApp ${index + 1}`}
-          className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent px-5 text-base font-medium text-foreground transition-colors hover:bg-accent-dark"
-        >
-          <WhatsAppIcon />
-          Entrar em contato
-        </a>
-      ))}
-    </div>
+    <a
+      href={whatsappHref(digits, catName)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent px-5 text-base font-medium text-foreground transition-colors hover:bg-accent-dark"
+    >
+      <WhatsAppIcon />
+      Entrar em contato
+    </a>
   );
 }

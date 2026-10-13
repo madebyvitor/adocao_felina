@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { CatCard } from "@/components/cat-card";
-import { ageGroup, type AgeGroup, type Cat } from "@/lib/cats";
+import { ageGroup, type AgeGroup, type Cat } from "@/lib/cat";
 
 const ageFilters = ["filhote", "adulto", "idoso"] as const;
 type Filter = "todos" | AgeGroup;
@@ -73,7 +73,9 @@ export function Catalog({ cats }: { cats: Cat[] }) {
         })}
       </div>
 
-      {visible.length === 0 ? (
+      {cats.length === 0 ? (
+        <p className="mt-10 text-muted">Nenhum gato no catálogo agora.</p>
+      ) : visible.length === 0 ? (
         <p className="mt-10 text-muted">Nenhum gato nesta idade agora.</p>
       ) : (
         <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

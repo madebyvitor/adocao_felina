@@ -1,4 +1,4 @@
-import { statusLabel, type CatStatus } from "@/lib/cats";
+import { statusLabel, type CatStatus } from "@/lib/cat";
 
 const tone: Record<CatStatus, string> = {
   disponivel: "bg-available-bg text-available",
