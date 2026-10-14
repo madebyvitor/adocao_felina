@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
+import * as m from "motion/react-m";
 import { CatPhoto } from "@/components/cat-photo";
 import { StatusBadge } from "@/components/status-badge";
 import type { Cat } from "@/lib/cat";
@@ -18,7 +19,7 @@ export function CatCard({
   const reduce = useReducedMotion();
 
   return (
-    <motion.li
+    <m.li
       layout
       initial={reduce ? false : { y: 10 }}
       animate={{
@@ -58,6 +59,6 @@ export function CatCard({
           </p>
         </div>
       </Link>
-    </motion.li>
+    </m.li>
   );
 }

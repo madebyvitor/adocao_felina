@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
+import * as m from "motion/react-m";
 import { useLayoutEffect, useState } from "react";
 
 type CatPhotoProps = {
@@ -30,7 +31,7 @@ export function CatPhoto({
   }, []);
 
   return (
-    <motion.div
+    <m.div
       layoutId={reduce || !visible ? undefined : `cat-photo-${slug}`}
       className={className}
       style={{ borderRadius: 28 }}
@@ -46,6 +47,6 @@ export function CatPhoto({
           className="object-cover"
         />
       ) : null}
-    </motion.div>
+    </m.div>
   );
 }

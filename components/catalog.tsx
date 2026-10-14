@@ -15,7 +15,7 @@ const filterLabel: Record<Filter, string> = {
   idoso: "Idosos",
 };
 
-export function Catalog({ cats }: { cats: Cat[] }) {
+export function Catalog({ cats, children }: { cats: Cat[]; children: React.ReactNode }) {
   const [filter, setFilter] = useState<Filter>("todos");
   const counts: Record<AgeGroup, number> = {
     filhote: cats.filter((cat) => ageGroup(cat.age_description) === "filhote").length,
@@ -29,16 +29,7 @@ export function Catalog({ cats }: { cats: Cat[] }) {
   return (
     <div>
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div className="max-w-xl">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">
-            Ainda procuram um lar
-          </p>
-          <h2 className="mt-3 font-serif text-4xl tracking-tight text-balance sm:text-5xl">
-            Pequenas personalidades.
-            <br />
-            Grandes encontros.
-          </h2>
-        </div>
+        {children}
         <button
           type="button"
           onClick={() => setFilter("todos")}

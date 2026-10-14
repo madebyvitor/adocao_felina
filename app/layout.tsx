@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Fraunces, Geist } from "next/font/google";
-import { SiteFooter, SiteHeader } from "@/components/site-header";
+import { MotionProvider } from "@/components/motion-provider";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { siteDescription, siteName, siteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -40,7 +42,9 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${geist.variable} ${fraunces.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <SiteHeader />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1">
+          <MotionProvider>{children}</MotionProvider>
+        </div>
         <SiteFooter />
       </body>
     </html>

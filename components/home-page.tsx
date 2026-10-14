@@ -148,7 +148,18 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
       </section>
 
       <section id="gatos" className="mx-auto w-full max-w-6xl px-5 py-16 sm:py-24">
-        <Catalog cats={cats} />
+        <Catalog cats={cats}>
+          <div className="max-w-xl">
+            <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">
+              Ainda procuram um lar
+            </p>
+            <h2 className="mt-3 font-serif text-4xl tracking-tight text-balance sm:text-5xl">
+              Pequenas personalidades.
+              <br />
+              Grandes encontros.
+            </h2>
+          </div>
+        </Catalog>
       </section>
 
       <section
