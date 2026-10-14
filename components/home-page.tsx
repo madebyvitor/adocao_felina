@@ -208,19 +208,11 @@ export function HomePageContent({ cats }: { cats: Cat[] }) {
               </li>
             ))}
           </ol>
-          <div className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-2">
-            <div>
-              <h3 className="font-serif text-xl">Apartamento</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                Dá certo, desde que a casa seja segura e a rotina tenha alguém por perto.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-serif text-xl">Outros animais</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                A apresentação é devagar. O perfil diz como cada gato convive.
-              </p>
-            </div>
+          <div className="mt-10 max-w-md border-t border-line pt-8">
+            <h3 className="font-serif text-xl">Outros animais</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
+              A apresentação é devagar. O perfil diz como cada gato convive.
+            </p>
           </div>
         </div>
       </section>
