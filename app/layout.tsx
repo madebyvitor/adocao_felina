@@ -8,11 +8,13 @@ import "./globals.css";
 
 const geist = Geist({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-geist-sans",
 });
 
 const fraunces = Fraunces({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-fraunces",
 });
 

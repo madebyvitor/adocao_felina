@@ -66,15 +66,21 @@ async function queryCats(): Promise<Cat[]> {
   return sortCats((data ?? []).map((row) => toCat(row as CatRow)));
 }
 
+const catalogCache = {
+  stale: 300,
+  revalidate: 60,
+  expire: 3600,
+} as const;
+
 export async function getCats(): Promise<Cat[]> {
   "use cache";
-  cacheLife("minutes");
+  cacheLife(catalogCache);
   return queryCats();
 }
 
 export async function getCatBySlug(slug: string): Promise<Cat | null> {
   "use cache";
-  cacheLife("minutes");
+  cacheLife(catalogCache);
   const cats = await getCats();
   return cats.find((cat) => cat.slug === slug) ?? null;
 }
