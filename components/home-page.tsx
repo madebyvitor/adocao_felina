@@ -37,7 +37,6 @@ function PhotoFrame({
           alt={`Foto de ${cat.name}`}
           fill
           priority={priority}
-          loading={priority ? "eager" : "lazy"}
           sizes={sizes}
           className="object-cover"
         />

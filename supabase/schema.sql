@@ -15,7 +15,7 @@ CREATE TABLE cats (
     personality TEXT,
     health_info TEXT,
     photos TEXT[] DEFAULT '{}',
-    whatsapp_contact TEXT NOT NULL, -- Número de quem cuida deste gato (DDI + DDD + número)
+    whatsapp_contacts TEXT[] DEFAULT '{}', -- Números de quem cuida deste gato (DDI + DDD + número)
     status cat_status DEFAULT 'disponivel',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -50,7 +50,7 @@ EXECUTE FUNCTION generate_slug();
 COMMENT ON TABLE cats IS 'Catálogo principal de gatos para adoção';
 COMMENT ON COLUMN cats.slug IS 'Gerado automaticamente. Parte legível da URL (ex: mingau-a1b2)';
 COMMENT ON COLUMN cats.photos IS 'Array contendo as URLs absolutas das fotos';
-COMMENT ON COLUMN cats.whatsapp_contact IS 'Número do WhatsApp responsável pelo gato (somente números + DDI + DDD)';
+COMMENT ON COLUMN cats.whatsapp_contacts IS 'Números de WhatsApp de quem cuida do gato. Cada item é somente números + DDI + DDD';
 
 -- 5. Segurança (RLS - Row Level Security)
 -- O RLS é ativado. Nenhuma política de escrita (INSERT/UPDATE/DELETE) será criada via API.

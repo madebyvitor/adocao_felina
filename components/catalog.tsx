@@ -81,7 +81,7 @@ export function Catalog({ cats }: { cats: Cat[] }) {
         <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {visible.map((cat, index) => (
-              <CatCard key={cat.slug} cat={cat} index={index} priority={index < 4} />
+              <CatCard key={cat.slug} cat={cat} index={index} priority={false} />
             ))}
           </AnimatePresence>
         </ul>

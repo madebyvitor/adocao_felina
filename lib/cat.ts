@@ -10,7 +10,7 @@ export type Cat = {
   personality: string;
   health_info: string;
   photos: string[];
-  whatsapp_contact: string;
+  whatsapp_contacts: string[];
   status: CatStatus;
   created_at: string;
 };

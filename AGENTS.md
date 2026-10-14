@@ -6,7 +6,7 @@ Catálogo digital para conectar gatos a lares. Os gatos vêm da tabela `cats` no
 
 - Página inicial com a vitrine: foto, nome, idade em texto e uma frase de personalidade.
 - Perfil em `/gatos/[slug]` com galeria, história, temperamento, saúde e link compartilhável.
-- Um botão **Entrar em contato** no perfil, com o `whatsapp_contact` daquele gato. A seção de ajuda e o rodapé usam os números gerais em `lib/site.ts`.
+- No perfil, um botão **Entrar em contato** por número em `whatsapp_contacts`. Com vários números, os botões são **WhatsApp 1**, **WhatsApp 2**, na ordem do array. A seção de ajuda e o rodapé usam os números gerais em `lib/site.ts`.
 - Status: `disponivel`, `em_processo`, `adotado`. Gato adotado permanece no site e não mostra o WhatsApp.
 - Open Graph do perfil: título `Adote o {nome}!`, descrição curta e a primeira foto.
 
@@ -16,7 +16,7 @@ Next.js (App Router), TypeScript, Tailwind CSS, Motion para transição de pági
 
 ## Dados
 
-Tabela `cats`: `id`, `slug`, `name`, `age_description`, `sex`, `description`, `personality`, `health_info`, `photos`, `whatsapp_contact`, `status`, `created_at`.
+Tabela `cats`: `id`, `slug`, `name`, `age_description`, `sex`, `description`, `personality`, `health_info`, `photos`, `whatsapp_contacts`, `status`, `created_at`.
 
 O `slug` é gerado no banco a partir do nome. `photos` guarda URLs absolutas. A leitura passa por `getCats()` e `getCatBySlug()`, com `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` no ambiente. O esquema está em `supabase/schema.sql`.
 

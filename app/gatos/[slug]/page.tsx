@@ -116,7 +116,7 @@ async function CatProfile({ params }: CatPageProps) {
             </p>
           ) : (
             <div className="mt-6">
-              <WhatsAppButtons catName={cat.name} phone={cat.whatsapp_contact} />
+              <WhatsAppButtons catName={cat.name} phones={cat.whatsapp_contacts} />
             </div>
           )}
 

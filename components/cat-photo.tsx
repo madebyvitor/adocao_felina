@@ -42,7 +42,6 @@ export function CatPhoto({
           alt={alt}
           fill
           priority={priority}
-          loading={priority ? "eager" : "lazy"}
           sizes={sizes}
           className="object-cover"
         />

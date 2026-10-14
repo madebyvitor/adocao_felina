@@ -32,7 +32,7 @@ const footerGroups = [
 function Logo({ className = "h-16" }: { className?: string }) {
   return (
     <Link href="/" className="flex items-center">
-      <img src="/logo.svg" alt={siteName} className={`${className} w-auto`} />
+      <img src="/logo.svg" alt={siteName} width={2000} height={2000} className={`${className} w-auto`} />
     </Link>
   );
 }

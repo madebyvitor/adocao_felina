@@ -21,7 +21,7 @@ type CatRow = {
   personality: string | null;
   health_info: string | null;
   photos: string[] | null;
-  whatsapp_contact: string | null;
+  whatsapp_contacts: string[] | null;
   status: CatStatus;
   created_at: string;
 };
@@ -37,7 +37,7 @@ function toCat(row: CatRow): Cat {
     personality: row.personality ?? "",
     health_info: row.health_info ?? "",
     photos: (row.photos ?? []).filter((photo) => photo.length > 0),
-    whatsapp_contact: row.whatsapp_contact ?? "",
+    whatsapp_contacts: (row.whatsapp_contacts ?? []).filter((phone) => phone.length > 0),
     status: row.status,
     created_at: row.created_at,
   };
@@ -56,7 +56,7 @@ async function queryCats(): Promise<Cat[]> {
   const { data, error } = await supabase
     .from("cats")
     .select(
-      "id, slug, name, age_description, sex, description, personality, health_info, photos, whatsapp_contact, status, created_at",
+      "id, slug, name, age_description, sex, description, personality, health_info, photos, whatsapp_contacts, status, created_at",
     );
 
   if (error) {

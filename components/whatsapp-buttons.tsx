@@ -8,19 +8,27 @@ function WhatsAppIcon() {
   );
 }
 
-export function WhatsAppButtons({ catName, phone }: { catName: string; phone: string }) {
-  const digits = phone.replace(/\D/g, "");
-  if (!digits) return null;
+export function WhatsAppButtons({ catName, phones }: { catName: string; phones: string[] }) {
+  const contacts = phones
+    .map((phone) => phone.replace(/\D/g, ""))
+    .filter((phone) => phone.length > 0);
+
+  if (contacts.length === 0) return null;
 
   return (
-    <a
-      href={whatsappHref(digits, catName)}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent px-5 text-base font-medium text-foreground transition-colors hover:bg-accent-dark"
-    >
-      <WhatsAppIcon />
-      Entrar em contato
-    </a>
+    <div className="flex flex-col gap-3">
+      {contacts.map((phone, index) => (
+        <a
+          key={`${phone}-${index}`}
+          href={whatsappHref(phone, catName)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent px-5 text-base font-medium text-foreground transition-colors hover:bg-accent-dark"
+        >
+          <WhatsAppIcon />
+          {contacts.length === 1 ? "Entrar em contato" : `WhatsApp ${index + 1}`}
+        </a>
+      ))}
+    </div>
   );
 }
