@@ -9,8 +9,8 @@ export const siteUrl =
 
 /** Números placeholder. Substituir pelos dois WhatsApps reais antes de publicar. */
 export const whatsappNumbers = [
-  { id: "whatsapp-1", phone: "5500000000001" },
-  { id: "whatsapp-2", phone: "5500000000002" },
+  { id: "whatsapp-1", phone: "5583991460479" },
+  { id: "whatsapp-2", phone: "5583993843570" },
 ] as const;
 
 export function adoptionMessage(catName: string) {
